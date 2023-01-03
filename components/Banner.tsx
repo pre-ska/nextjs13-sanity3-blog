@@ -2,8 +2,8 @@ const Banner = () => {
   return (
     <div className='flex flex-col lg:flex-row lg:space-x-5 justify-between font-bold px-10 mb-10'>
       <div>
-        <h1 className='text-7xl'>Dev Blog</h1>
-        <h2 className='mt-5 md:mt-0'>
+        <h1 className='text-6xl'>Repos Blog</h1>
+        <h2 className='mt-8 md:mt-0 py-2'>
           Welcome to{' '}
           <span className='underline decoration-4 decoration-[#F7AB0A]'>
             every developer
@@ -16,7 +16,7 @@ const Banner = () => {
       </div>
 
       <p className='mt-5 md:mt-2 text-gray-400 max-w-sm'>
-        Repository of tutorials and practices in react, Nextjs and Nodejs
+        Repository of tutorials and practices in React, Nextjs and Nodejs
       </p>
     </div>
   );
