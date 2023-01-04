@@ -10,6 +10,37 @@ type Props = {
     slug: string;
   };
 };
+
+/**
+ * ! ovaj block koda kontrolira dali će biti static page
+ * ! ili će biti refreshana/rebuildana svakih 60 sec samo ako je stranica aktivna
+ *
+ * ! - bez revalidate konstante (ali sa generateStaticParams) je obična static site generated stranica
+ *
+ * ! - bez generateStaticParams je server side rendered (na svaki zahtjev)
+ */
+export const revalidate = 60; // revalidate this page every 60 seconds
+
+export async function generateStaticParams() {
+  const query = groq`
+		*[_type == "post"]
+		{
+			slug
+		}
+		`;
+
+  const slugs: Post[] = await client.fetch(query);
+  const slugRoutes = slugs.map((slug) => slug.slug.current);
+
+  return slugRoutes.map((slug) => ({
+    slug,
+  }));
+}
+
+/******************************************************** */
+/********************* KRAJ BLOKA *********************** */
+/******************************************************** */
+
 const Post = async ({ params: { slug } }: Props) => {
   const query = groq`
     *[_type == 'post' && slug.current == $slug][0] {
